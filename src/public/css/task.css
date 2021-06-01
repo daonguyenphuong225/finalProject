@@ -1,0 +1,96 @@
+
+html,
+body {
+   margin:0;
+   padding:0;
+   height:100%;
+   
+}
+#container {
+   min-height:100%;
+   position:relative;
+}
+#header {
+    
+ 
+}
+#body {
+   padding:10px;
+   padding-bottom:60px;   
+   background-image: linear-gradient(to right, rgb(86, 225, 243) , rgb(235, 93, 216));
+   height: 90vh;
+}
+
+.logo{
+    height: 50px;
+}
+.navbar{
+    background-image: linear-gradient(to right, rgb(86, 225, 243) , rgb(235, 93, 216));
+    padding-top:0 ; 
+    height: 10vh;
+}
+
+.content-title{
+   background-image: linear-gradient(rgb(86, 225, 243), rgb(235, 93, 216));
+  
+   border-radius: 5px;
+   padding: 5px;
+}
+.col-design{
+    background-color: #ebecf0;
+    margin: 20px;
+    border-radius: 5px;
+}
+h5 {
+  
+   
+}
+
+.todo-task{
+   padding: 3px;
+   margin: 7px;
+   background-color: white;
+   border-radius: 5px;
+   border-bottom:1px solid silver;
+}
+.modal-btn{
+ color: rgb(151, 147, 147);
+}
+.content-btn{
+   position: relative;
+   width: 100%;
+   display: flex;
+   justify-content: space-between;
+   padding: 3px;
+   margin-top: 7px;
+   background-color: white;
+   border-radius: 5px;
+   border-bottom:1px solid silver;
+}
+.svg-pencil{
+   position: absolute;
+   right: 7px;
+   top: 7px;
+   display: none;
+  
+}
+span{
+   padding-left: 10px;
+}
+
+ .content-btn:hover .svg-pencil{
+    display: inline;
+}
+ .content-btn:hover{
+   background-color: rgba(85, 82, 82, 0.2)
+}
+.input-content, .input-user{
+   
+   text-align: start;
+   overflow:hidden; 
+   width:70% ;
+   border-radius: 5px;
+}
+.modal-content{
+  
+}
