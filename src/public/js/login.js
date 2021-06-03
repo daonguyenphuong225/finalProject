@@ -14,8 +14,17 @@ loginSubmit.addEventListener("click", function(e) {
             }),
         })
         .then((data) => data.json())
-        .then((data) => console.log(data))
+        .then((data) => {
+            console.log(data)
+            localStorage.setItem("token", data.token)
+                // if (data.token)
+                //     window.location.href = ""
+        })
         .catch((error) => console.log(error));
+
+    // fetch("/api")
+    //     .then((data) => data.json())
+    //     .then((data) => console.log(data));
 });
 const signupSubmit = document.getElementById("signupSubmit");
 signupSubmit.addEventListener("click", function(e) {

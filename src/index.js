@@ -15,7 +15,6 @@ app.use(express.json());
 app.use("/", express.static(path.join(__dirname, "public")));
 
 app.use("/api", Router);
-
 app.listen(8000, () => {
     console.log("server abc chay cong 8000");
 });
