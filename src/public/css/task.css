@@ -10,10 +10,7 @@ body {
    min-height:100%;
    position:relative;
 }
-#header {
-    
- 
-}
+
 #body {
    padding:10px;
    padding-bottom:60px;   
@@ -40,10 +37,6 @@ body {
     background-color: #ebecf0;
     margin: 20px;
     border-radius: 5px;
-}
-h5 {
-  
-   
 }
 
 .todo-task{
@@ -91,6 +84,4 @@ span{
    width:70% ;
    border-radius: 5px;
 }
-.modal-content{
-  
-}
+

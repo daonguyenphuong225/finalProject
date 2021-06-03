@@ -7,7 +7,7 @@ $(document).ready(function () {
         let project = "aczb123";
 
         $.ajax({
-            url: '/task',
+            url: '/api/task',
             type: 'POST',
 
             data: {
@@ -64,7 +64,7 @@ $(document).ready(function () {
 
     function callAjax(id,title, status) {
         $.ajax({
-            url: '/update-task',
+            url: '/api/update-task',
             type: 'PUT',
             data: {
                 id: id,

@@ -28,7 +28,7 @@ exports.login = async(req, res) => {
 
 exports.register = async(req, res) => {
     try {
-        const { username, password } = req.body;
+        const { username, password } = req.body;    
         const alreadyExistsUser = await User.findOne({ username }).catch(
             (err) => {
                 console.log("Error: ", err);
