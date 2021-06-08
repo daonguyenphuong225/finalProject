@@ -5,6 +5,7 @@ const Router = require("./routes");
 const app = express();
 const cookieParser = require("cookie-parser");
 
+
 app.use(cookieParser());
 
 app.set("views", path.join(__dirname, "views"));
@@ -15,6 +16,7 @@ app.use(express.json());
 app.use("/public", express.static(path.join(__dirname, "public")));
 
 app.use("/api", Router);
+
 app.listen(8000, () => {
     console.log("server abc chay cong 8000");
 });

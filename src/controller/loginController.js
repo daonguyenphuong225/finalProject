@@ -47,8 +47,8 @@ exports.register = async(req, res) => {
 exports.change = async(req, res) => {
     try {
         const { username, password } = req.body;
-        const hased = hashPassword(password);
-        const Updated = await User.findOneAndUpdate({ username }, { password: hased }, { upsert: true, new: true },
+        const hashed = hashPassword(password);
+        const Updated = await User.findOneAndUpdate({ username }, { password: hashed }, { new: true },
             (err, result) => {
                 if (err) return res.status(400).json({ message: err });
                 else return res.json({ message: result });
