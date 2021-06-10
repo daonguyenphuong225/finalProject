@@ -21,13 +21,11 @@ loginSubmit.addEventListener("click", function(e) {
         .then((data) => {
             console.log(data)
             if (data.token)
-                if (check) {
+                if (check)
                     localStorage.setItem("token", data.token)
-                    window.location.href = "/api/task"
-                } else {
+                else
                     sessionStorage.setItem("token", data.token);
-                    window.location.href = "/api/task"
-                }
+            window.location.href = "/api/task"
         })
         .catch((error) => console.log(error));
 
