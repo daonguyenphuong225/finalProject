@@ -28,14 +28,14 @@ exports.login = async(req, res) => {
 
 exports.register = async(req, res) => {
     try {
-        const { username, password } = req.body;    
+        const { username, password } = req.body;
         const alreadyExistsUser = await User.findOne({ username }).catch(
             (err) => {
                 console.log("Error: ", err);
             }
         );
         if (alreadyExistsUser)
-            return res.status(409).json({ message: "username da ton tai" });
+            return res.status(400).json({ message: "username da ton tai" });
         const hased = hashPassword(password);
         const newUser = await User.create({ username, password: hased });
 
@@ -44,7 +44,7 @@ exports.register = async(req, res) => {
         return res.status(404).json(err);
     }
 }
-exports.change = async(req, res) => {
+exports.changePass = async(req, res) => {
     try {
         const { username, password } = req.body;
         const hashed = hashPassword(password);
