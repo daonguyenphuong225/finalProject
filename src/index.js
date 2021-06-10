@@ -5,6 +5,7 @@ const Router = require("./routes");
 const app = express();
 const cookieParser = require("cookie-parser");
 
+
 app.use(cookieParser());
 
 app.set("views", path.join(__dirname, "views"));

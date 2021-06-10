@@ -7,6 +7,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     <link rel="stylesheet" href="../css/login.css">
+    <script>
+        function checkToken() {
+            const token = localStorage.getItem('token');
+            console.log(token);
+            if (token) {
+                window.location.href = "/api/task";
+                return;
+            }
+        }
+        checkToken();
+    </script>
 </head>
 
 <body>
@@ -39,6 +50,9 @@
                         <div class="btn-layer"></div>
                         <input type="submit" value="Login" id="loginSubmit">
                     </div>
+                    <label class="checkbox">
+                        <input type="checkbox" id="checkbox" value="remember-me">Remember me
+                    </label>
                     <div class="signup-link">
                         Not a member? <a href="">Signup now</a>
                     </div>

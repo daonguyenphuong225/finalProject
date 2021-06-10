@@ -2,7 +2,8 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
 const salt = bcrypt.genSaltSync(10);
-const privateKey = "secretKey";
+require("dotenv").config();
+const privateKey = process.env.privateKey;
 
 exports.hashPassword = (rawPassword) => {
     return bcrypt.hashSync(rawPassword, salt);
