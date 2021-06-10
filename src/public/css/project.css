@@ -1,0 +1,9 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.parent .content .card-deck .card {
+  padding: 10px;
+  margin: 10px;
+}
