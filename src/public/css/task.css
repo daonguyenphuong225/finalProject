@@ -67,6 +67,12 @@ body {
    display: none;
   
 }
+.svg-arrow-up{
+   position: absolute;
+   right: 25px;
+   top: 7px;
+
+}
 span{
    padding-left: 10px;
 }
@@ -77,8 +83,8 @@ span{
  .content-btn:hover{
    background-color: rgba(85, 82, 82, 0.2)
 }
-.input-content, .input-user{
-   
+.input-content, .input-user,.input-priority, .update-title-input, .update-priority{
+    
    text-align: start;
    overflow:hidden; 
    width:70% ;

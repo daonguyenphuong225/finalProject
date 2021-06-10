@@ -6,10 +6,17 @@ var taskSchema = new mongoose.Schema({
         required: true,
         trim: true
     },
+    priority:{
+        type: Number,
+        required: true,
+        trim: true,
+        enum : [0,1,2]
+    },
     status:{
         type: String,
         required: true,
-        trim: true
+        trim: true,
+        enum : ['toDo','doing','done']
     },
     user: String,
     project: String

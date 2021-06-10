@@ -163,6 +163,24 @@
                                             data-bs-target=".<%=element.status%>">
                                             <span><%=element.title%></span>
                                             <input type="hidden" value="<%=element._id%>">
+                                            <input type="hidden" value="<%=element.priority%>">
+                                            <%if(element.priority == 0){%>
+                                                <svg style="color: red;" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="svg-arrow-up bi bi-arrow-up" viewBox="0 0 16 16">
+                                                    <path fill-rule="evenodd" d="M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5z"/>
+                                                  </svg>
+                                            <%}%>
+                                            <%if(element.priority == 1){%>
+                                                <svg style="color: orange;" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="svg-arrow-up bi bi-arrow-up" viewBox="0 0 16 16">
+                                                    <path fill-rule="evenodd" d="M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5z"/>
+                                                  </svg>
+                                            <%}%>
+                                            <%if(element.priority == 2){%>
+                                                <svg style="color: rgb(28, 238, 28);" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="svg-arrow-up bi bi-arrow-up" viewBox="0 0 16 16">
+                                                    <path fill-rule="evenodd" d="M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5z"/>
+                                                  </svg>
+                                            <%}%>
+                                            
+                                         
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                 fill="currentColor" class="svg-pencil bi bi-pencil" viewBox="0 0 16 16">
                                                 <path
@@ -181,9 +199,13 @@
                                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                             aria-label="Close"></button>
                                                     </div>
-                                                    <div class="modal-body">
-                                                        <input class="update-title-input" type="text">
+                                                    <div class="modal-body ">
+                                                        Title: <br>
+                                                        <input class="update-title-input mb-2" type="text"> <br>
                                                         <input class="update-id-input" type="hidden">
+                                                        Priority: <br>
+                                                        <select  class="update-priority mb-2" name="priority" id="">    
+                                                        </select>
                                                     </div>
                                                     <div class="modal-footer">
                                                         <input type="hidden" value="<%=element.status%>">
@@ -248,6 +270,12 @@
 
                                                         <input class="input-user m-2" type="text"
                                                             placeholder="Username">
+                                                       <select  class="input-priority m-2" name="priority" id="">
+                                                           <option value=""selected disabled>priority...</option>
+                                                           <option value="0">High</option>
+                                                           <option value="1">Medium</option>
+                                                           <option value="2">Low</option>
+                                                       </select>
                                                     </div>
                                                     <div class="modal-footer">
                                                         <input type="hidden" value="<%=listStatus[i].value%>">

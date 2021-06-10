@@ -2,7 +2,7 @@ const TaskModel = require('../model/taskSchema')
 
 exports.getList = function (req, res) {
 
-    TaskModel.find({})
+    TaskModel.find({}).sort({"priority" :1})
         .then(function (data) {
             let listData = {
                 listData: data,
@@ -40,9 +40,9 @@ exports.createTask = function(req,res){
 }
 
 exports.updateTask = function(req,res){
-    let {id,title,status} = req.body
+    let {id,title,status,priority} = req.body
     
-    TaskModel.updateOne({_id:id},{title:title, status:status})
+    TaskModel.updateOne({_id:id},{title:title, status:status,priority:priority})
     .then((data)=>{
         res.json('Update task thành công')
     })

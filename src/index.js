@@ -14,7 +14,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use("/public", express.static(path.join(__dirname, "public")));
 
-app.use("/api", Router);
+app.use("/", Router);
 app.listen(8000, () => {
     console.log("server abc chay cong 8000");
 });
