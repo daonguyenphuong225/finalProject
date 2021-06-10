@@ -1,5 +1,3 @@
-const { config } = require("dotenv");
-
 const loginSubmit = document.getElementById("loginSubmit");
 loginSubmit.addEventListener("click", function(e) {
     e.preventDefault();
