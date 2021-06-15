@@ -11,8 +11,9 @@
         function checkToken() {
             const token = localStorage.getItem('token');
             console.log(token);
+            const id = localStorage.getItem('id')
             if (token) {
-                window.location.href = "/api/task";
+                window.location.href = "/api/task/" + id;
                 return;
             }
         }
