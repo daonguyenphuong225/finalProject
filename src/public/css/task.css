@@ -14,7 +14,7 @@ body {
 #body {
    padding:10px;
    padding-bottom:60px;   
-   background-image: linear-gradient(to right, rgb(86, 225, 243) , rgb(235, 93, 216));
+   background-image: url("/public/img/bg.png");
    height: 90vh;
 }
 
@@ -22,13 +22,14 @@ body {
     height: 50px;
 }
 .navbar{
-    background-image: linear-gradient(to right, rgb(86, 225, 243) , rgb(235, 93, 216));
+  
+   background-image: url("/public/img/bg.png");
     padding-top:0 ; 
     height: 10vh;
 }
 
 .content-title{
-   background-image: linear-gradient(rgb(86, 225, 243), rgb(235, 93, 216));
+   background-image: linear-gradient(rgb(107, 232, 248), rgb(48, 34, 236));
   
    border-radius: 5px;
    padding: 5px;
