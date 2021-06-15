@@ -1,10 +1,16 @@
 const router = require("express").Router();
-const { register, login, changePass } = require("../controller/loginController");
+const {
+    register,
+    login,
+    changePass,
+    logout,
+} = require("../controller/loginController");
 
 router.post("/register", register);
 router.post("/login", login);
 router.put("/", changePass);
-// router.get("/", async(req, res) => {
-//     res.render("home", { title: home })
-// })
+router.get("/logout", logout);
+router.get("/login", (req, res) => {
+    res.render("login.ejs");
+})
 module.exports = router;

@@ -14,8 +14,6 @@ exports.comparePassword = (rawPassword, hashedPassword) => {
     return match;
 };
 
-exports.validateToken = () => {};
-
 exports.generateToken = (user) => {
     const token = jwt.sign(user, privateKey);
     return token;

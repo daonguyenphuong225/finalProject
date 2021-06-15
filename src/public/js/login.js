@@ -16,22 +16,19 @@ loginSubmit.addEventListener("click", function(e) {
         })
         .then((data) => data.json())
         .then((data) => {
-            console.log(data)
+            console.log(data);
             if (data.token)
                 if (check) {
-                    localStorage.setItem("token", data.token)
-                    window.location.href = "/api/task"
+                    localStorage.setItem("token", data.token);
+                    sessionStorage.setItem("id", data.id);
+                    window.location.href = "/api/task/" + data.id;
                 } else {
                     sessionStorage.setItem("token", data.token);
-                    window.location.href = "/api/task"
+                    sessionStorage.setItem("id", data.id);
+                    window.location.href = "/api/task/" + data.id;
                 }
-
         })
         .catch((error) => console.log(error));
-
-    // fetch("/api")                                //api get cai gi do co trong tuong lai
-    //     .then((data) => data.json())
-    //     .then((data) => console.log(data));
 });
 const signupSubmit = document.getElementById("signupSubmit");
 signupSubmit.addEventListener("click", function(e) {
@@ -39,9 +36,7 @@ signupSubmit.addEventListener("click", function(e) {
     const username = document.getElementById("usernameSignup").value;
     const password = document.getElementById("passwordSignup").value;
     const passwordConfirm = document.getElementById("confirmPassword").value;
-    if (password != passwordConfirm)
-        alert("password did'n not match");
-
+    if (password != passwordConfirm) alert("password did'n not match");
     else {
         fetch("/api/register", {
                 method: "POST",
