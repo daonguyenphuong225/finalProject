@@ -47,7 +47,7 @@ loginSubmit.addEventListener("click", function(e) {
                 } else { //                                           ^
                     sessionStorage.setItem("token", data.token); //   |
                     sessionStorage.setItem("id", data.id); //         |
-                    window.location.href = "/api/task/" + data.id; //loi kha nang o day
+                    window.location.href = "/api/task/" + data.id; //loi kha nang o day, do file task.ejs
                     console.log("debug5");
                 }
             console.log("debug6");
