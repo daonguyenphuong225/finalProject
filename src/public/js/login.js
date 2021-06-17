@@ -17,16 +17,40 @@ loginSubmit.addEventListener("click", function(e) {
         .then((data) => data.json())
         .then((data) => {
             console.log(data);
+            console.log("debug4");
+            if (data.status) {
+                Command: toastr["warning"](data.status);
+
+                toastr.options = {
+                    closeButton: false,
+                    debug: false,
+                    newestOnTop: false,
+                    progressBar: false,
+                    positionClass: "toast-top-right",
+                    preventDuplicates: false,
+                    onclick: null,
+                    showDuration: "300",
+                    hideDuration: "1000",
+                    timeOut: "5000",
+                    extendedTimeOut: "1000",
+                    showEasing: "swing",
+                    hideEasing: "linear",
+                    showMethod: "fadeIn",
+                    hideMethod: "fadeOut",
+                };
+            }
             if (data.token)
                 if (check) {
                     localStorage.setItem("token", data.token);
                     localStorage.setItem("id", data.id);
-                    window.location.href = "/api/task/" + data.id;
-                } else {
-                    sessionStorage.setItem("token", data.token);
-                    sessionStorage.setItem("id", data.id);
-                    window.location.href = "/api/task/" + data.id;
+                    window.location.href = "/api/task/" + data.id; //.........
+                } else { //                                           ^
+                    sessionStorage.setItem("token", data.token); //   |
+                    sessionStorage.setItem("id", data.id); //         |
+                    window.location.href = "/api/task/" + data.id; //loi kha nang o day, do file task.ejs
+                    console.log("debug5");
                 }
+            console.log("debug6");
         })
         .catch((error) => console.log(error));
 });
@@ -34,9 +58,31 @@ const signupSubmit = document.getElementById("signupSubmit");
 signupSubmit.addEventListener("click", function(e) {
     e.preventDefault();
     const username = document.getElementById("usernameSignup").value;
+    const email = document.getElementById("emailSignup").value;
     const password = document.getElementById("passwordSignup").value;
     const passwordConfirm = document.getElementById("confirmPassword").value;
-    if (password != passwordConfirm) alert("password did'n not match");
+    if (password != passwordConfirm) {
+        // alert("password did'n match");
+        Command: toastr["warning"]("password không trùng");
+
+        toastr.options = {
+            closeButton: false,
+            debug: false,
+            newestOnTop: false,
+            progressBar: false,
+            positionClass: "toast-top-right",
+            preventDuplicates: false,
+            onclick: null,
+            showDuration: "300",
+            hideDuration: "1000",
+            timeOut: "5000",
+            extendedTimeOut: "1000",
+            showEasing: "swing",
+            hideEasing: "linear",
+            showMethod: "fadeIn",
+            hideMethod: "fadeOut",
+        };
+    }
     else {
         fetch("/api/register", {
                 method: "POST",
@@ -46,10 +92,55 @@ signupSubmit.addEventListener("click", function(e) {
                 body: JSON.stringify({
                     username,
                     password,
+                    email,
                 }),
             })
             .then((data) => data.json())
-            .then((data) => console.log(data))
+            .then((data) => {
+                console.log(data);
+                if (data.status) {
+                    Command: toastr["warning"](data.status);
+
+                    toastr.options = {
+                        closeButton: false,
+                        debug: false,
+                        newestOnTop: false,
+                        progressBar: false,
+                        positionClass: "toast-top-right",
+                        preventDuplicates: false,
+                        onclick: null,
+                        showDuration: "300",
+                        hideDuration: "1000",
+                        timeOut: "5000",
+                        extendedTimeOut: "1000",
+                        showEasing: "swing",
+                        hideEasing: "linear",
+                        showMethod: "fadeIn",
+                        hideMethod: "fadeOut",
+                    };
+                }
+                if (data.message) {
+                    Command: toastr["success"](data.message);
+
+                    toastr.options = {
+                        closeButton: false,
+                        debug: false,
+                        newestOnTop: false,
+                        progressBar: false,
+                        positionClass: "toast-top-right",
+                        preventDuplicates: false,
+                        onclick: null,
+                        showDuration: "300",
+                        hideDuration: "1000",
+                        timeOut: "5000",
+                        extendedTimeOut: "1000",
+                        showEasing: "swing",
+                        hideEasing: "linear",
+                        showMethod: "fadeIn",
+                        hideMethod: "fadeOut",
+                    };
+                }
+            })
             .catch((error) => console.log(error));
     }
 });

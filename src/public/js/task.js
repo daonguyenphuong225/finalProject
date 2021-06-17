@@ -12,7 +12,6 @@ $(document).ready(function() {
         console.log(priority);
 
         $.ajax({
-<<<<<<< HEAD
             url: '/task',
             type: 'POST',
 
@@ -24,18 +23,6 @@ $(document).ready(function() {
                 project: project
             }
         })
-=======
-                url: '/api/task',
-                type: 'POST',
-
-                data: {
-                    title: title,
-                    status: status,
-                    user: user,
-                    project: project
-                }
-            })
->>>>>>> origin/hoang
             .then((data) => {
                 location.reload();
             })
@@ -75,7 +62,6 @@ $(document).ready(function() {
         $('.update-id-input').val(id)
     })
 
-<<<<<<< HEAD
     $('.update-btn').click(function () {
         let title = $(this).parent().siblings().eq(1).children().eq(1).val()
         let status = $(this).siblings().eq(0).val()
@@ -88,25 +74,11 @@ $(document).ready(function() {
         let status = $(this).siblings().eq(0).val()
         let id = $(this).parent().siblings().eq(1).children().eq(3).val()
         let priority = $(this).parent().siblings().eq(1).children().eq(5).val()
-=======
-    $('.update-btn').click(function() {
-        let title = $(this).parent().siblings().eq(1).children().eq(0).val()
-        let status = $(this).siblings().eq(0).val()
-        let id = $(this).parent().siblings().eq(1).children().eq(1).val()
-
-        callAjax(id, title, status)
-    })
-    $('.move-btn').click(function() {
-        let title = $(this).parent().siblings().eq(1).children().eq(0).val()
-        let status = $(this).siblings().eq(0).val()
-        let id = $(this).parent().siblings().eq(1).children().eq(1).val()
->>>>>>> origin/hoang
         if (status == 'toDo') {
             status = 'doing'
         } else {
             status = 'done'
         }
-<<<<<<< HEAD
         callAjax(id, title, status,priority)
     })
     $('.moveBack-btn').click(function () {
@@ -114,20 +86,11 @@ $(document).ready(function() {
         let status = $(this).siblings().eq(0).val()
         let id = $(this).parent().siblings().eq(1).children().eq(3).val()
         let priority = $(this).parent().siblings().eq(1).children().eq(5).val()
-=======
-        callAjax(id, title, status)
-    })
-    $('.moveBack-btn').click(function() {
-        let title = $(this).parent().siblings().eq(1).children().eq(0).val()
-        let status = $(this).siblings().eq(0).val()
-        let id = $(this).parent().siblings().eq(1).children().eq(1).val()
->>>>>>> origin/hoang
         if (status == 'doing') {
             status = 'toDo'
         } else {
             status = 'doing'
         }
-<<<<<<< HEAD
         callAjax(id, title, status,priority)
     })
 
@@ -142,21 +105,6 @@ $(document).ready(function() {
                 priority: priority
             }
         })
-=======
-        callAjax(id, title, status)
-    })
-
-    function callAjax(id, title, status) {
-        $.ajax({
-                url: '/api/update-task',
-                type: 'PUT',
-                data: {
-                    id: id,
-                    title: title,
-                    status: status
-                }
-            })
->>>>>>> origin/hoang
             .then((data) => {
                 location.reload();
             })
