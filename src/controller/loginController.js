@@ -39,10 +39,9 @@ exports.register = async(req, res) => {
         const alreadyExistsUser = await User.findOne({ username }).catch((err) => {
             console.log("Error: ", err);
         });
-        if (alreadyExistsUser) {
-            req.flash("warning", "username đã tồn tại");
+
+        if (alreadyExistsUser)
             return res.status(400).json({ status: "username đã tồn tại" });
-        }
 
         const hashed = hashPassword(password);
         const newUser = await User.create({ username, password: hashed });
@@ -67,7 +66,8 @@ exports.verifyEmail = async(req, res) => {
             });
             user.email = email;
             await user.save();
-            res.status(200).json({ message: "Dang ky thanh cong" });
+
+            res.status(200).send("Dang ky thanh cong");
         }
     } catch (e) {
         return res.status(400).send({ message: e });
@@ -91,7 +91,7 @@ exports.changePass = async(req, res) => {
 
 exports.logout = async(req, res) => {
     try {
-        res.redirect("/api/login");
+        res.redirect("/login");
     } catch (error) {
         return res.status(400).json(error);
     }

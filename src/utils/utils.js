@@ -24,6 +24,7 @@ function sendEmail(email, codeCheck) {
             pass: process.env.pass,
         },
     });
+
     const mailOptions = {
         from: "Hoang",
         to: email,
@@ -34,6 +35,9 @@ function sendEmail(email, codeCheck) {
         if (err) console.log(err);
         else console.log("Message sent successfully");
     });
+
+
+
 }
 
 module.exports = { CodeCheck, generateCode, sendEmail };
