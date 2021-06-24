@@ -16,7 +16,7 @@ function generateCode() {
     return Math.random().toString().substring(2, 8);
 }
 
-function sendEmail(email, codeCheck) {
+function sendEmail(id, email, codeCheck, mode) {
     let Transport = nodemailer.createTransport({
         service: "Gmail",
         auth: {
@@ -24,16 +24,33 @@ function sendEmail(email, codeCheck) {
             pass: process.env.pass,
         },
     });
-    const mailOptions = {
-        from: "Hoang",
-        to: email,
-        subject: "Email registered successfully",
-        html: `<a href=http://localhost:8000/api/${email}/${codeCheck}>click here to complete register</a>`,
-    };
-    Transport.sendMail(mailOptions, function(err, res) {
-        if (err) console.log(err);
-        else console.log("Message sent successfully");
-    });
+    let mailOptions = {};
+    switch (mode) {
+        case 1:
+            mailOptions = {
+                from: "Hoang",
+                to: email,
+                subject: "Email registered successfully",
+                html: `<a href=http://localhost:8000/api/${id}/${email}/${codeCheck}>click here to complete register</a>`,
+            };
+            Transport.sendMail(mailOptions, function(err, res) {
+                if (err) console.log(err);
+                else console.log("Message sent successfully");
+            });
+            break;
+        case 2:
+            mailOptions = {
+                from: "Hoang",
+                to: email,
+                subject: "Email change password successfully",
+                html: `<a href=http://localhost:8000/api/changePass/${id}/${codeCheck}>click here</a>`,
+            };
+            Transport.sendMail(mailOptions, function(err, res) {
+                if (err) console.log(err);
+                else console.log("Message sent successfully");
+            });
+            break;
+    }
 }
 
 module.exports = { CodeCheck, generateCode, sendEmail };

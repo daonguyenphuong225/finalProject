@@ -36,20 +36,20 @@ exports.login = async(req, res) => {
 exports.register = async(req, res) => {
     try {
         const { username, password, email } = req.body;
+
         const alreadyExistsUser = await User.findOne({ username }).catch((err) => {
             console.log("Error: ", err);
         });
-        if (alreadyExistsUser) {
-            req.flash("warning", "username đã tồn tại");
+
+        if (alreadyExistsUser)
             return res.status(400).json({ status: "username đã tồn tại" });
-        }
 
         const hashed = hashPassword(password);
         const newUser = await User.create({ username, password: hashed });
 
         //send mail
         codeCheck.setCode(generateCode());
-        sendEmail(email, codeCheck.getCode());
+        sendEmail(newUser._id, email, codeCheck.getCode(), 1);
         newUser.code = codeCheck.getCode();
         await newUser.save();
         res.status(200).json({ message: "Check email" });
@@ -66,19 +66,55 @@ exports.verifyEmail = async(req, res) => {
                 console.log(err);
             });
             user.email = email;
+            user.code = null;
             await user.save();
-            res.status(200).json({ message: "Dang ky thanh cong" });
+            res.status(200).send("Dang ky thanh cong");
         }
     } catch (e) {
         return res.status(400).send({ message: e });
     }
 };
 
+exports.mailtoChangePass = async(req, res) => {
+    try {
+        const { id } = req.body;
+        const user = await User.findOne({ _id: id }).catch(err => {
+            console.log(err);
+        })
+        const email = user.email;
+        codeCheck.setCode(generateCode());
+        sendEmail(id, email, codeCheck.getCode(), 2);
+        user.code = codeCheck.getCode();
+        return res
+            .status(200)
+            .json({ message: "Kiem tra mail de doi pass" });
+    } catch (error) {
+        return res.status(400).send({ message: error });
+    }
+}
+
+exports.verifyEmailtoChangePassword = async(req, res) => {
+    try {
+        const { id, code } = req.params;
+        const user = await User.findOne({ _id: id }).catch(err => {
+            console.log(err);
+        })
+        if (user && user.code == code) {
+            user.code = null;
+            return res.status(200).json({ id });
+        }
+        return res.status(400).json({ message: "Khong tim thay tai khoan hoac sai code check" })
+    } catch (error) {
+        return res.status(400).send({ message: error });
+    }
+}
+
 exports.changePass = async(req, res) => {
     try {
-        const { username, password } = req.body;
+        const { password } = req.body;
+        const { id } = req.params;
         const hashed = hashPassword(password);
-        const Updated = await User.findOneAndUpdate({ username }, { password: hashed }, { new: true },
+        const Updated = await User.findOneAndUpdate({ _id: id }, { password: hashed }, { new: true },
             (err, result) => {
                 if (err) return res.status(400).json({ message: err });
                 else return res.status(200).json({ message: result });
@@ -91,7 +127,7 @@ exports.changePass = async(req, res) => {
 
 exports.logout = async(req, res) => {
     try {
-        res.redirect("/api/login");
+        res.redirect("/login");
     } catch (error) {
         return res.status(400).json(error);
     }

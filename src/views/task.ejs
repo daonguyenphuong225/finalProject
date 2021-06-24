@@ -54,7 +54,7 @@
                         </button>
                         <button type="button" class="btn m-2" style="background-color: rgba(223, 235, 220, 0.1);">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                class="bi bi-gear" viewBox="0 0 16 16">
+                                class="bi bi-gear" id="btnChangePassword" viewBox="0 0 16 16">
                                 <path
                                     d="M8 4.754a3.246 3.246 0 1 0 0 6.492 3.246 3.246 0 0 0 0-6.492zM5.754 8a2.246 2.246 0 1 1 4.492 0 2.246 2.246 0 0 1-4.492 0z" />
                                 <path
@@ -148,7 +148,7 @@
                                 </h5>
                             </div>
 
-                            <div class="todo-body mt-1"style=" overflow-y: scroll;height: 50vh;">
+                            <div class="todo-body mt-1" style=" overflow-y: scroll;height: 50vh;">
                                 <%for (const element of listData) { if(element.status==listStatus[i].value){%>
                                     <div class="todo-content ">
                                         <button class="content-btn btn" data-bs-toggle="modal" data-bs-target=".<%=element.status%>">
@@ -193,9 +193,8 @@
                                                     <div class="modal-body ">
                                                         Title: <br>
                                                         <input class="update-title-input mb-2" type="text"> <br>
-                                                        <input class="update-id-input" type="hidden">
-                                                        Priority: <br>
-                                                        <select  class="update-priority mb-2" name="priority" id="">    
+                                                        <input class="update-id-input" type="hidden"> Priority: <br>
+                                                        <select class="update-priority mb-2" name="priority" id="">    
                                                         </select>
                                                     </div>
                                                     <div class="modal-footer">
@@ -270,18 +269,14 @@
                                                     <div class="modal-body">
                                                         <input class="input-content m-2" type="text" placeholder="Enter title for this task...">
 
-<<<<<<< HEAD
-                                                        <input class="input-user m-2" type="text"
-                                                            placeholder="Username">
-                                                       <select  class="input-priority m-2" name="priority" id="">
+                                                        <input class="input-user m-2" type="text" placeholder="Username">
+                                                        <select class="input-priority m-2" name="priority" id="">
                                                            <option value=""selected disabled>priority...</option>
                                                            <option value="0">High</option>
                                                            <option value="1">Medium</option>
                                                            <option value="2">Low</option>
-                                                       </select>
-=======
-                                                        <input class="input-user m-2" type="text" placeholder="Username">
->>>>>>> origin/hoang
+                                                       </select> =======
+                                                        <input class="input-user m-2" type="text" placeholder="Username"> >>>>>>> origin/hoang
                                                     </div>
                                                     <div class="modal-footer">
                                                         <input type="hidden" value="<%=listStatus[i].value%>">
@@ -306,6 +301,6 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="/public/js/task.js"></script>
 <script src="/public/js/logout.js"></script>
-
+<script src="/public/js/changePassword.js"></script>
 
 </html>

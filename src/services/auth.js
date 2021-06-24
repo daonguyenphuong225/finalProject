@@ -1,6 +1,6 @@
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-
+require("dotenv").config();
 const salt = bcrypt.genSaltSync(10);
 require("dotenv").config();
 const privateKey = process.env.privateKey;
