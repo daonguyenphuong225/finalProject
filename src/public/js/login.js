@@ -43,11 +43,12 @@ loginSubmit.addEventListener("click", function(e) {
                 if (check) {
                     localStorage.setItem("token", data.token);
                     localStorage.setItem("id", data.id);
-                    window.location.href = "/task/" + data.id; //.........
-                } else { //                                           ^
-                    sessionStorage.setItem("token", data.token); //   |
-                    sessionStorage.setItem("id", data.id); //         |
-                    window.location.href = "/task/" + data.id; //loi kha nang o day, do file task.ejs
+                    sessionStorage.setItem("id", data.id)
+                    window.location.href = "/task/" + data.id;
+                } else {
+                    sessionStorage.setItem("token", data.token);
+                    sessionStorage.setItem("id", data.id);
+                    window.location.href = "/task/" + data.id;
                     console.log("debug5");
                 }
             console.log("debug6");
@@ -62,7 +63,6 @@ signupSubmit.addEventListener("click", function(e) {
     const password = document.getElementById("passwordSignup").value;
     const passwordConfirm = document.getElementById("confirmPassword").value;
     if (password != passwordConfirm) {
-        // alert("password did'n match");
         Command: toastr["warning"]("password không trùng");
 
         toastr.options = {
