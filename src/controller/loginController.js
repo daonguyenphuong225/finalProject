@@ -130,7 +130,6 @@ exports.logout = async(req, res) => {
         req.session.destroy((err) => {
             if (err)
                 return res.status(400).json({ message: err });
-            req.logout();
             res.redirect("/login");
         });
     } catch (error) {
