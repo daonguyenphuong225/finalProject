@@ -10,7 +10,6 @@ const { CodeCheck } = require("../utils/utils");
 let codeCheck = new CodeCheck();
 exports.login = async(req, res) => {
     try {
-        console.log("debug1");
         const { username, password } = req.body;
         const user = await User.findOne({ username });
         if (!user) {
@@ -22,14 +21,15 @@ exports.login = async(req, res) => {
         if (!matchPassword) {
             return res.status(400).json({ status: "user hoặc password không thấy" });
         }
-        console.log("debug2");
+
         const token = generateToken({ username });
-        console.log("debug3");
+        req.session.id = user._id;
+        req.session.token = token;
         return res
             .status(200)
             .json({ message: "Dang nhap thanh cong", id: user._id, token });
     } catch (error) {
-        throw new Error(error.message);
+        return res.status(400).json(err);
     }
 };
 
@@ -74,41 +74,41 @@ exports.verifyEmail = async(req, res) => {
         return res.status(400).send({ message: e });
     }
 };
-
+//gui mail 
 exports.mailtoChangePass = async(req, res) => {
-    try {
-        const { id } = req.body;
-        const user = await User.findOne({ _id: id }).catch(err => {
-            console.log(err);
-        })
-        const email = user.email;
-        codeCheck.setCode(generateCode());
-        sendEmail(id, email, codeCheck.getCode(), 2);
-        user.code = codeCheck.getCode();
-        return res
-            .status(200)
-            .json({ message: "Kiem tra mail de doi pass" });
-    } catch (error) {
-        return res.status(400).send({ message: error });
-    }
-}
-
-exports.verifyEmailtoChangePassword = async(req, res) => {
-    try {
-        const { id, code } = req.params;
-        const user = await User.findOne({ _id: id }).catch(err => {
-            console.log(err);
-        })
-        if (user && user.code == code) {
-            user.code = null;
-            return res.status(200).json({ id });
+        try {
+            const { id } = req.body;
+            const user = await User.findOne({ _id: id }).catch(err => {
+                console.log(err);
+            })
+            const email = user.email;
+            codeCheck.setCode(generateCode());
+            sendEmail(id, email, codeCheck.getCode(), 2);
+            user.code = codeCheck.getCode();
+            return res
+                .status(200)
+                .json({ message: "Kiem tra mail de doi pass" });
+        } catch (error) {
+            return res.status(400).send({ message: error });
         }
-        return res.status(400).json({ message: "Khong tim thay tai khoan hoac sai code check" })
-    } catch (error) {
-        return res.status(400).send({ message: error });
     }
-}
-
+    //xac nhan mail
+exports.verifyEmailtoChangePassword = async(req, res) => {
+        try {
+            const { id, code } = req.params;
+            const user = await User.findOne({ _id: id }).catch(err => {
+                console.log(err);
+            })
+            if (user && user.code == code) {
+                user.code = null;
+                return res.status(200).json({ id });
+            }
+            return res.status(400).json({ message: "Khong tim thay tai khoan hoac sai code check" })
+        } catch (error) {
+            return res.status(400).send({ message: error });
+        }
+    }
+    //doi pass
 exports.changePass = async(req, res) => {
     try {
         const { password } = req.body;
@@ -127,7 +127,12 @@ exports.changePass = async(req, res) => {
 
 exports.logout = async(req, res) => {
     try {
-        res.redirect("/login");
+        req.session.destroy((err) => {
+            if (err)
+                return res.status(400).json({ message: err });
+            req.logout();
+            res.redirect("/login");
+        });
     } catch (error) {
         return res.status(400).json(error);
     }

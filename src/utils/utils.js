@@ -1,5 +1,5 @@
 const nodemailer = require("nodemailer");
-require("dotenv").config();
+
 class CodeCheck {
     constructor(code) {
         this.code = code;
