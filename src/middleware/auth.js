@@ -6,7 +6,7 @@ const privateKey = process.env.privateKey;
 function checkAcount(req, res, next) {
     try {
         const token = req.session.token;
-        const user = User.findOne({ token });
+        const user = User.findOne({ password: token });
         const result = jwt.verify(token, privateKey);
 
         if (user.username == result)
