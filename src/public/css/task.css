@@ -16,6 +16,7 @@ body {
    padding-bottom:60px;   
    background-image: url("/public/img/bg.png");
    height: 90vh;
+   position: relative;
 }
 
 .logo{
@@ -26,6 +27,21 @@ body {
    background-image: url("/public/img/bg.png");
     padding-top:0 ; 
     height: 10vh;
+
+}
+.z-index-class{
+   z-index: 2000;
+}
+.btn-top{
+   width: 140px;
+}
+.dropdown-menu{
+   transform: translate(0px, 40px)  !important; 
+}
+.scroll-content {
+   width: 100%;
+   overflow-x:auto;
+
 }
 
 .content-title{
@@ -38,6 +54,8 @@ body {
     background-color: #ebecf0;
     margin: 20px;
     border-radius: 5px;
+    min-width: 300px;
+   
 }
 
 .todo-task{
@@ -60,6 +78,7 @@ body {
    background-color: white;
    border-radius: 5px;
    border-bottom:1px solid silver;
+   overflow: hidden;
 }
 .svg-pencil{
    position: absolute;
@@ -92,3 +111,5 @@ span{
    border-radius: 5px;
 }
 
+#draggable { width: 100px; height: 100px; padding: 0.5em; float: left; margin: 10px 10px 10px 0; }
+#droppable { width: 150px; height: 150px; padding: 0.5em; float: left; margin: 10px; }
