@@ -1,15 +1,34 @@
 $(document).ready(function() {
 
+    $(".add-user-btn").click(function(){
+       let userId = $('#addUser').val()
+       let projectId = $('#projectId').val()
+       $.ajax({
+        url: '/task/add-user',
+        type: 'POST',
+
+        data: {
+            userId:userId,
+            projectId:projectId
+        }
+    })
+        .then((data) => {
+            location.reload();
+        })
+        .catch((err) => {
+            console.log(err)
+        })
+    })
+
     $('.navbar-toggler').click(function(){
         $('.navbar').toggleClass('z-index-class')
     })
     $('.create-task-btn').click(function() {
         let title = $(this).parent().siblings().eq(1).children().val();
-        let priority = $(this).parent().siblings().eq(1).children().eq(2).val();
+        let priority = $(this).parent().siblings().eq(1).children().eq(3).val();
         let status = $(this).siblings().val();
         let userId =  $(this).parent().siblings().eq(1).children().eq(2).val();
-
-        let project = "aczb123";
+        let projectId =  $(this).parent().siblings().eq(1).children().eq(4).val();
 
         if (priority && title) {
             $.ajax({
@@ -20,8 +39,8 @@ $(document).ready(function() {
                     title: title,
                     priority: priority,
                     status: status,
-                    user: userId,
-                    project: project
+                    userId: userId,
+                    projectId:projectId
                 }
             })
                 .then((data) => {

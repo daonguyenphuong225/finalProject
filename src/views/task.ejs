@@ -17,7 +17,7 @@
         <div id="body">
             <div class="container">
                 <div class="d-flex justify-content-between" style="color: rgba(229, 226, 226, 0.89);">
-                    <h5>Project name: abcde</h5>
+                    <h5>Project title: <%=project.title%></h5>
                     <div>
 
                         <button type="button" class="btn-top btn btn-primary mx-2">
@@ -26,11 +26,33 @@
                             </span>
                             <span class="visually-hidden">unread messages</span>
                         </button>
-                        <button type="button" class="btn-top btn btn-primary  mx-2">
-                            Total users: <span class="badge bg-secondary">9</span>
-                            <span class="visually-hidden">unread messages</span>
+
+                        <button class=" btn-top btn btn-primary  mx-2" data-bs-toggle="modal" data-bs-target="#total-users">
+                            Total users: <span class="badge bg-secondary"><%=project.users.length+1%></span>
                         </button>
 
+                       <!-- Modal -->
+                       <div class="modal fade" id="total-users" style="color: black;" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+
+                                    <h5 class="modal-title" id="exampleModalLabel">Total users</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body ">
+                                  <p>Admin: <%=userName%></p>
+                                  <p>Users:</p>
+                                  <%for(const userAccepted of usersAccepted){%>
+                                    <p><%=userAccepted.username%></p>
+                                 <%}%>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                         <button class=" btn-top btn btn-success  mx-2" data-bs-toggle="modal" data-bs-target="#add-users"><svg
                                 xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                 class="bi bi-plus-lg" viewBox="0 0 16 16">
@@ -48,15 +70,16 @@
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
-                                        <select name="" id="">
+                                        <input id="projectId" type="hidden" value="<%=projectId%>">
+                                        <select  id="addUser">
                                             <%for(const user of users){%>
-                                                <option value=""><%=user.username%></option>
+                                                <option value="<%=user._id%>"><%=user.username%></option>
                                             <%}%>
                                         </select>
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                        <button type="button" class="btn btn-primary">Add user</button>
+                                        <button type="button" class="btn btn-primary add-user-btn">Add user</button>
                                     </div>
                                 </div>
                             </div>
@@ -169,9 +192,10 @@
                                                         <textarea class="input-content m-2" placeholder="Enter title for this task..."  cols="30" rows="3"></textarea><br>
                                                         <select class="input-priority m-2" name="username">
                                                            <option value=""selected disabled>user who does this task...</option>
-                                                           <option value="0">admin1</option>
-                                                           <option value="1">admin2</option>
-                                                           <option value="2">admin3</option>
+                                                           <%for(const userAccepted of usersAccepted){%>
+                                                            <p><%=userAccepted.username%></p>
+                                                           <option value="<%=userAccepted._id%>"><%=userAccepted.username%></option>
+                                                           <%}%>
                                                        </select> 
                                                         <select class="input-priority m-2" name="priority" id="">
                                                            <option value=""selected disabled>priority...</option>
@@ -179,6 +203,7 @@
                                                            <option value="1">Medium</option>
                                                            <option value="2">Low</option>
                                                        </select> 
+                                                       <input type="hidden" name="projectId" value="<%=projectId%>">
                                                     </div>
                                                     <div class="modal-footer">
                                                         <input type="hidden" value="<%=listStatus[i].value%>">

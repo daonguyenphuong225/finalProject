@@ -16,8 +16,6 @@ loginSubmit.addEventListener("click", function(e) {
         })
         .then((data) => data.json())
         .then((data) => {
-            console.log(data);
-            console.log("debug4");
             if (data.status) {
                 Command: toastr["warning"](data.status);
 

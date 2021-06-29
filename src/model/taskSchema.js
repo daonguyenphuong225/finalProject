@@ -18,11 +18,11 @@ var taskSchema = new mongoose.Schema({
         trim: true,
         enum : ['toDo','doing','done']
     },
-    user: {
+    userId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "user",
       },
-    project:{
+    projectId:{
         type: mongoose.Schema.Types.ObjectId,
         ref: "project",
       }
