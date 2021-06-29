@@ -8,18 +8,36 @@ const {
 const { generateCode, sendEmail } = require("../utils/utils");
 const { CodeCheck } = require("../utils/utils");
 let codeCheck = new CodeCheck();
+
+exports.addUserProject = async(req, res) => {
+    try {
+        const { userId } = req.params;
+        const user = await User.findOne({ _id: userId });
+        user.addProject(req.params.idProject);
+        return user;
+    } catch (error) {
+        res.status(400).json({ message: error });
+    }
+};
+
 exports.login = async(req, res) => {
     try {
         const { username, password } = req.body;
         const user = await User.findOne({ username });
         if (!user) {
-            return res.status(400).json({ status: "user hoặc password không thấy" });
+            return res
+                .status(400)
+                .json({ status: "user hoặc password không thấy" });
         }
         if (!user.email)
-            return res.status(400).json({ status: "Tài khoản chưa kích hoạt email" });
+            return res
+                .status(400)
+                .json({ status: "Tài khoản chưa kích hoạt email" });
         const matchPassword = comparePassword(password, user.password);
         if (!matchPassword) {
-            return res.status(400).json({ status: "user hoặc password không thấy" });
+            return res
+                .status(400)
+                .json({ status: "user hoặc password không thấy" });
         }
 
         const token = generateToken({ username });
@@ -37,9 +55,11 @@ exports.register = async(req, res) => {
     try {
         const { username, password, email } = req.body;
 
-        const alreadyExistsUser = await User.findOne({ username }).catch((err) => {
-            console.log("Error: ", err);
-        });
+        const alreadyExistsUser = await User.findOne({ username }).catch(
+            (err) => {
+                console.log("Error: ", err);
+            }
+        );
 
         if (alreadyExistsUser)
             return res.status(400).json({ status: "username đã tồn tại" });
@@ -74,41 +94,41 @@ exports.verifyEmail = async(req, res) => {
         return res.status(400).send({ message: e });
     }
 };
-//gui mail 
+//gui mail
 exports.mailtoChangePass = async(req, res) => {
-        try {
-            const { id } = req.body;
-            const user = await User.findOne({ _id: id }).catch(err => {
-                console.log(err);
-            })
-            const email = user.email;
-            codeCheck.setCode(generateCode());
-            sendEmail(id, email, codeCheck.getCode(), 2);
-            user.code = codeCheck.getCode();
-            return res
-                .status(200)
-                .json({ message: "Kiem tra mail de doi pass" });
-        } catch (error) {
-            return res.status(400).send({ message: error });
-        }
+    try {
+        const { id } = req.body;
+        const user = await User.findOne({ _id: id }).catch((err) => {
+            console.log(err);
+        });
+        const email = user.email;
+        codeCheck.setCode(generateCode());
+        sendEmail(id, email, codeCheck.getCode(), 2);
+        user.code = codeCheck.getCode();
+        return res.status(200).json({ message: "Kiem tra mail de doi pass" });
+    } catch (error) {
+        return res.status(400).send({ message: error });
     }
-    //xac nhan mail
+};
+//xac nhan mail
 exports.verifyEmailtoChangePassword = async(req, res) => {
-        try {
-            const { id, code } = req.params;
-            const user = await User.findOne({ _id: id }).catch(err => {
-                console.log(err);
-            })
-            if (user && user.code == code) {
-                user.code = null;
-                return res.status(200).json({ id });
-            }
-            return res.status(400).json({ message: "Khong tim thay tai khoan hoac sai code check" })
-        } catch (error) {
-            return res.status(400).send({ message: error });
+    try {
+        const { id, code } = req.params;
+        const user = await User.findOne({ _id: id }).catch((err) => {
+            console.log(err);
+        });
+        if (user && user.code == code) {
+            user.code = null;
+            return res.status(200).json({ id });
         }
+        return res
+            .status(400)
+            .json({ message: "Khong tim thay tai khoan hoac sai code check" });
+    } catch (error) {
+        return res.status(400).send({ message: error });
     }
-    //doi pass
+};
+//doi pass
 exports.changePass = async(req, res) => {
     try {
         const { password } = req.body;
@@ -128,8 +148,7 @@ exports.changePass = async(req, res) => {
 exports.logout = async(req, res) => {
     try {
         req.session.destroy((err) => {
-            if (err)
-                return res.status(400).json({ message: err });
+            if (err) return res.status(400).json({ message: err });
             res.redirect("/login");
         });
     } catch (error) {

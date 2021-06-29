@@ -6,7 +6,8 @@ const {
     logout,
     verifyEmail,
     mailtoChangePass,
-    verifyEmailtoChangePassword
+    verifyEmailtoChangePassword,
+    addUserProject,
 } = require("../controller/loginController");
 
 router.post("/register", register);
@@ -14,6 +15,7 @@ router.post("/login", login);
 router.get("/logout", logout);
 router.get("/:id/:email/:code", verifyEmail);
 router.post("/mailtoChangePass", mailtoChangePass);
+router.put("/user/project/:idUser/:idProject", addUserProject);
 // router.get("/changePass/:/id/:code", verifyEmailtoChangePassword, (req, res) => {
 //     res.render("/changepass.ejs");
 // });

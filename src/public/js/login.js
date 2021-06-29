@@ -43,13 +43,12 @@ loginSubmit.addEventListener("click", function(e) {
                 if (check) {
                     localStorage.setItem("token", data.token);
                     localStorage.setItem("id", data.id);
-                    sessionStorage.setItem("id", data.id)
-                    window.location.href = "/task/" + data.id;
+                    sessionStorage.setItem("id", data.id);
+                    window.location.href = "/project/" + data.id;
                 } else {
                     sessionStorage.setItem("token", data.token);
                     sessionStorage.setItem("id", data.id);
-                    window.location.href = "/task/" + data.id;
-                    console.log("debug5");
+                    window.location.href = "/project/" + data.id;
                 }
             console.log("debug6");
         })
@@ -84,7 +83,6 @@ signupSubmit.addEventListener("click", function(e) {
         };
     }
     else {
-        console.log("debug2")
         fetch("/api/register", {
                 method: "POST",
                 headers: {
