@@ -9,7 +9,7 @@ const {
     verifyEmailtoChangePassword,
     addUserProject,
 } = require("../controller/loginController");
-
+// const { checkAccount } = require("../middleware/auth")
 router.post("/register", register);
 router.post("/login", login);
 router.get("/logout", logout);
