@@ -18,8 +18,14 @@ var taskSchema = new mongoose.Schema({
         trim: true,
         enum : ['toDo','doing','done']
     },
-    user: String,
-    project: String
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "user",
+      },
+    project:{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "project",
+      }
 },{timestamps: true},{collection:'tasks'})
 
 let TaskModel = mongoose.model('tasks',taskSchema);

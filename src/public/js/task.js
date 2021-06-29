@@ -1,34 +1,41 @@
 $(document).ready(function() {
 
+    $('.navbar-toggler').click(function(){
+        $('.navbar').toggleClass('z-index-class')
+    })
     $('.create-task-btn').click(function() {
         let title = $(this).parent().siblings().eq(1).children().val();
         let priority = $(this).parent().siblings().eq(1).children().eq(2).val();
-        if (priority == null) {
-            alert("you need confirm priority ")
-        }
         let status = $(this).siblings().val();
-        let user = 1242352523;
+        let userId =  $(this).parent().siblings().eq(1).children().eq(2).val();
+
         let project = "aczb123";
-        console.log(priority);
 
-        $.ajax({
-            url: '/task',
-            type: 'POST',
+        if (priority && title) {
+            $.ajax({
+                url: '/task',
+                type: 'POST',
+    
+                data: {
+                    title: title,
+                    priority: priority,
+                    status: status,
+                    user: userId,
+                    project: project
+                }
+            })
+                .then((data) => {
+                    location.reload();
+                })
+                .catch((err) => {
+                    console.log(err)
+                })
+        }else{
+            alert("you need confirm all information ")
+        }
+      
 
-            data: {
-                title: title,
-                priority: priority,
-                status: status,
-                user: user,
-                project: project
-            }
-        })
-            .then((data) => {
-                location.reload();
-            })
-            .catch((err) => {
-                console.log(err)
-            })
+        
     })
 
     $('.content-btn').click(function() {
@@ -69,30 +76,48 @@ $(document).ready(function() {
         let priority = $(this).parent().siblings().eq(1).children().eq(5).val()
         callAjax(id, title, status,priority)
     })
-    $('.move-btn').click(function () {
-        let title = $(this).parent().siblings().eq(1).children().eq(1).val()
-        let status = $(this).siblings().eq(0).val()
-        let id = $(this).parent().siblings().eq(1).children().eq(3).val()
-        let priority = $(this).parent().siblings().eq(1).children().eq(5).val()
-        if (status == 'toDo') {
-            status = 'doing'
-        } else {
-            status = 'done'
-        }
+    $('.move-btn-todo').click(function () {
+        let title = $(this).parent().parent().parent().parent().siblings().eq(1).children().eq(1).val()
+        let status = 'toDo'
+        let id = $(this).parent().parent().parent().parent().siblings().eq(1).children().eq(3).val()
+        let priority = $(this).parent().parent().parent().parent().siblings().eq(1).children().eq(5).val()
+        callAjax(id, title, status,priority)
+
+    })
+   
+    $('.move-btn-doing').click(function () {
+        let title = $(this).parent().parent().parent().parent().siblings().eq(1).children().eq(1).val()
+        let status = 'doing'
+        let id = $(this).parent().parent().parent().parent().siblings().eq(1).children().eq(3).val()
+        let priority = $(this).parent().parent().parent().parent().siblings().eq(1).children().eq(5).val()
         callAjax(id, title, status,priority)
     })
-    $('.moveBack-btn').click(function () {
-        let title = $(this).parent().siblings().eq(1).children().eq(1).val()
-        let status = $(this).siblings().eq(0).val()
-        let id = $(this).parent().siblings().eq(1).children().eq(3).val()
-        let priority = $(this).parent().siblings().eq(1).children().eq(5).val()
-        if (status == 'doing') {
-            status = 'toDo'
-        } else {
-            status = 'doing'
-        }
+   
+    $('.move-btn-done').click(function () {
+        let title = $(this).parent().parent().parent().parent().siblings().eq(1).children().eq(1).val()
+        let status = 'done'
+        let id = $(this).parent().parent().parent().parent().siblings().eq(1).children().eq(3).val()
+        let priority = $(this).parent().parent().parent().parent().siblings().eq(1).children().eq(5).val()
         callAjax(id, title, status,priority)
     })
+
+    $('.delete-btn').click(function(){
+        let id = $(this).parent().siblings().eq(1).children().eq(3).val()
+        $.ajax({
+            url: '/update-task',
+            type: 'DELETE',
+            data: {
+                id: id,
+            }
+        })
+            .then((data) => {
+            location.reload()
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+    })
+   
 
     function callAjax(id, title, status,priority) {
         $.ajax({

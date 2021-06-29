@@ -23,14 +23,14 @@ const projectSchema = mongoose.Schema(
       required: true,
       trim: true,
     },
-    users: {
-      type: String,
+    users: [{
+      type: mongoose.Schema.Types.ObjectId,
       ref: "user",
-    },
-    tasks: {
-      type: String,
+    }],
+    tasks: [{
+      type: mongoose.Schema.Types.ObjectId,
       ref: "tasks",
-    },
+    }],
   },
   { collection: "project" }
 );
