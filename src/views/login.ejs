@@ -11,9 +11,9 @@
     <script>
         function checkToken() {
             const token = localStorage.getItem('token');
-            const id = localStorage.getItem('id')
+            const id=localStorage.getItem('id');
             if (token) {
-                window.location.href = "/project/" + id;
+                window.location.href = "/project/"+data.id;
                 return;
             }
         }
@@ -52,7 +52,7 @@
                         <input type="submit" value="Login" id="loginSubmit">
                     </div>
                     <label class="checkbox">
-                        <input type="checkbox" id="checkbox" value="remember-me">Remember me
+                        <!-- <input type="checkbox" id="checkbox" value="remember-me">Remember me -->
                     </label>
                     <div class="signup-link">
                         Not a member? <a href="">Signup now</a>
