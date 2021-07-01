@@ -65,10 +65,17 @@ exports.updateProject = function(req, res) {
         });
 };
 
-exports.deleteProject = async(projectid) => {
+exports.deleteProject = function(req,res) {
     try {
-        console.log(projectid);
-        const result = await ProjectModel.destroy({ where: { _id: projectid } });
-        return result;
-    } catch (error) {}
+        const id=req.body.id;
+        ProjectModel.deleteOne({ _id: id })
+        .then((data) => {
+            res.json('Delete project thành công')
+        })
+        .catch((err) => {
+            res.json(err)
+        })
+    } catch (error) {
+        console.log(error)
+    }
 };

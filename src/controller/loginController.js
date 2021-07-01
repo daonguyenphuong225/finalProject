@@ -41,7 +41,7 @@ exports.login = async(req, res) => {
         }
 
         const token = generateToken({ username });
-        req.session.id = user._id;
+        req.session.userId = user._id;
         req.session.token = token;
         return res
             .status(200)
