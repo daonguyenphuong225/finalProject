@@ -55,7 +55,8 @@ exports.createProject = async function (req,res){
    
 
 exports.updateProject = function(req, res) {
-    const { id, detail, status, users, tasks } = req.body;
+    try{
+        const { id, detail, status, users, tasks } = req.body;
     ProjectModel.updateOne({ _id: id }, { detail: detail, status: status, users: users, tasks: tasks })
         .then(() => {
             res.redirect("/project");
@@ -63,6 +64,10 @@ exports.updateProject = function(req, res) {
         .catch((err) => {
             res.json(err);
         });
+    }catch(error){
+        console.log(error);
+    }
+    
 };
 
 exports.deleteProject = function(req,res) {

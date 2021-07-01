@@ -52,7 +52,7 @@ $('.delete').click(function() {
         }
     })
         .then((data) => {
-            
+            location.reload()
         })
         .catch((err) => {
             console.log(err)

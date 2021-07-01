@@ -45,7 +45,7 @@ exports.login = async(req, res) => {
         req.session.token = token;
         return res
             .status(200)
-            .json({ message: "Dang nhap thanh cong", id: user._id, token });
+            .json({ message: "Dang nhap thanh cong", id: user._id, username: username,token });
     } catch (error) {
         return res.status(400).json(err);
     }
