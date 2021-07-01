@@ -47,7 +47,7 @@ exports.createProject = async function (req,res){
             admin: id
         })
         
-        res.render('Tạo project thành công')
+        res.json('Tạo project thành công')
     } catch (error) {
         res.json(error)
     }

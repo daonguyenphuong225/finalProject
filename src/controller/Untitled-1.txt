@@ -1,0 +1,10 @@
+localhost:/projects
+    => middle ware (cookie) => USERID => service du lieu dsanh sachs project thuoc USERID 
+    => EJS 
+
+
+
+Lam logout
+lam lai xác thưc ngươi duùg thông qua session 
+Phân quên: project của ông nao thi chỉ ông ấy nhin đuợc. 
+Đăng bai phải check quyenf voiidddlewarre API
