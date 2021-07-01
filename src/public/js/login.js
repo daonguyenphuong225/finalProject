@@ -3,7 +3,7 @@ loginSubmit.addEventListener("click", function(e) {
     e.preventDefault();
     const username = document.getElementById("usernameLogin").value;
     const password = document.getElementById("passwordLogin").value;
-    // let check = document.getElementById("checkbox").checked; //remember
+    let check = document.getElementById("checkbox").checked; //remember
     fetch("/api/login", {
             method: "POST",
             headers: {
@@ -38,17 +38,17 @@ loginSubmit.addEventListener("click", function(e) {
                 };
             }
             if (data.token)
-                // if (check) {
-                //     localStorage.setItem("token", data.token);
-                //     localStorage.setItem("id", data.id);
-                //     sessionStorage.setItem("id", data.id);
-                //     window.location.href = "/project/";
-                // } else {
+                if (check) {
+                    localStorage.setItem("token", data.token);
+                    localStorage.setItem("id", data.id);
+                    sessionStorage.setItem("id", data.id);
+                    window.location.href = "/project/"+data.id;
+                } else {
                     sessionStorage.setItem("token", data.token);
                     sessionStorage.setItem("id", data.id);
                     sessionStorage.setItem("username",data.username);
                     window.location.href = "/project/"+data.id;
-                // }
+                }
             console.log("debug6");
         })
         .catch((error) => console.log(error));
