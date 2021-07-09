@@ -5,26 +5,17 @@ const ProjectModel = require("../model/projectSchema");
 exports.getList = async function (req, res) {
 
   try {
-    let id = req.params.id
     let projectId = req.query.projectId
-
-    let userName=""
  
     let data = await TaskModel.find({projectId:projectId}).sort({ "priority": 1 })
     let users = await UserModel.find()
     let usersAccepted = await UserModel.find({idProject:projectId})
     console.log(usersAccepted);
     let project = await ProjectModel.findOne({_id:projectId})
-    for(user of users){
-        if(user._id == id){
-            userName = user.username
-        }
-    }
+   
     let listData = {
         users: users,
         usersAccepted:usersAccepted,
-        id:id,
-        userName: userName,
         listData: data,
         projectId:projectId,
         project:project,

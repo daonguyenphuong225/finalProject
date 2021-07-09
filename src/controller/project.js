@@ -5,28 +5,15 @@ const UserModel = require('../model/user')
 
 exports.getList = async function(req, res) {
     try {
-        let id = req.params.id
 
-        let userName=""
-        
-        let projects = await ProjectModel.find()
-     
+            
+        let projects = await ProjectModel.find({admin:req.session.userId})
         let users = await UserModel.find()
-
-      
-        for(user of users){
-            if(user._id == id){
-                userName = user.username
-              
-            }
-        }
 
         let listData = {
             projects: projects,
             users: users,
-            userName: userName,
             match: req.query,
-            id:id
         }
         res.render('project.ejs', listData)
     

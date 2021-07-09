@@ -47,7 +47,7 @@ loginSubmit.addEventListener("click", function(e) {
                     sessionStorage.setItem("token", data.token);
                     sessionStorage.setItem("id", data.id);
                     sessionStorage.setItem("username",data.username);
-                    window.location.href = "/project/"+data.id;
+                    window.location.href = "/project";
                 // }
             console.log("debug6");
         })

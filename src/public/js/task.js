@@ -1,5 +1,14 @@
 $(document).ready(function() {
 
+        
+    let username = sessionStorage.getItem("username");
+    let userId = sessionStorage.getItem("id");
+     $('#headerUsername').html(username)
+    $('input[name=userId]').val(userId)
+    $('#AdminName').html(`Admin: ${username}`)
+
+    
+
     $(".add-user-btn").click(function(){
        let userId = $('#addUser').val()
        let projectId = $('#projectId').val()
@@ -157,5 +166,6 @@ $(document).ready(function() {
             })
     }
 
+    
 
 });

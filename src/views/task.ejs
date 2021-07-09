@@ -41,7 +41,7 @@
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body ">
-                                  <p>Admin: <%=userName%></p>
+                                  <p id="AdminName"> </p>
                                   <p>Users:</p>
                                   <%for(const userAccepted of usersAccepted){%>
                                     <p><%=userAccepted.username%></p>
@@ -139,11 +139,16 @@
                                                     </div>
                                                     <div class="modal-body ">
                                                         Title: <br>
-                                                        <textarea  class="update-title-input mb-2" name="" id="" cols="30" rows="3"></textarea> <br>
+                                                        <textarea  class="update-title-input mb-2" cols="30" rows="3"></textarea> <br>
 
                                                         <input class="update-id-input" type="hidden"> Priority: <br>
                                                         <select class="update-priority mb-2" name="priority" id="">    
-                                                        </select>
+                                                        </select> <br>
+                                                        User doing this task:  <br>
+                                                        <%for( const user of users){%>
+                                                            <%if(JSON.stringify(element.userId) == JSON.stringify(user._id)){%>
+                                                                <input class=" update-username" type="text" value="<%=user.username%>" disabled> 
+                                                            <%}}%>
                                                     </div>
                                                     <div class="modal-footer">
                                                         <input type="hidden" value="<%=element.status%>">
