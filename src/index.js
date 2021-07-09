@@ -18,7 +18,7 @@ app.use("/public", express.static(path.join(__dirname, "public")));
 app.use(
     session({
         secret: process.env.privateKey,
-        resave: false,
+        resave: true,
         saveUninitialized: true,
         cookie: { secure: false },
     })
