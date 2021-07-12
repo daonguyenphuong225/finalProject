@@ -1,17 +1,10 @@
 
 $(document).ready(function () {
-    $.ajax({
-        url: `/project`,
-        type: 'GET',
-        data: {
-          admin: admin
-        }
-    })
-        .then((data) => {
-        })
-        .catch((err) => {
-            console.log(err)
-        })
+    let username = sessionStorage.getItem("username");
+    let userId = sessionStorage.getItem("id");
+    $('#headerUsername').html(username)
+    $('input[name=userId]').val(userId)
+
 
     $('.card').click(function () {
         let projectId = $(this).siblings().eq(0).val()

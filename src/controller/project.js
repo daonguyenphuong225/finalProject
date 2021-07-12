@@ -24,14 +24,13 @@ exports.getList = async function(req, res) {
 
 exports.createProject = async function (req,res){
     try {
-        let {title,detail,status} = req.body
-        let id = req.params.id
-        console.log(id);
+        let {title,detail,status,userId} = req.body
+
         let newProject = await ProjectModel.create({
             title: title,
             detail: detail,
             status:status,
-            admin: id
+            admin: userId
         })
         
         res.json('Tạo project thành công')
