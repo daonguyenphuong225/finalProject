@@ -1,4 +1,4 @@
-const nodemailer = require("nodemailer");
+const nodemailer = require('nodemailer');
 
 class CodeCheck {
     constructor(code) {
@@ -18,7 +18,7 @@ function generateCode() {
 
 function sendEmail(id, email, codeCheck, mode) {
     let Transport = nodemailer.createTransport({
-        service: "Gmail",
+        service: 'Gmail',
         auth: {
             user: process.env.user,
             pass: process.env.pass,
@@ -28,26 +28,26 @@ function sendEmail(id, email, codeCheck, mode) {
     switch (mode) {
         case 1:
             mailOptions = {
-                from: "Hoang",
+                from: 'Hoang',
                 to: email,
-                subject: "Email registered successfully",
+                subject: 'Email registered successfully',
                 html: `<a href=http://localhost:8000/api/${id}/${email}/${codeCheck}>click here to complete register</a>`,
             };
-            Transport.sendMail(mailOptions, function(err, res) {
+            Transport.sendMail(mailOptions, function (err, res) {
                 if (err) console.log(err);
-                else console.log("Message sent successfully");
+                else console.log('Message sent successfully');
             });
             break;
         case 2:
             mailOptions = {
-                from: "Hoang",
+                from: 'Hoang',
                 to: email,
-                subject: "Email change password successfully",
-                html: `<a href=http://localhost:8000/api/changePass/${id}/${codeCheck}>click here</a>`,
+                subject: 'Email change password successfully',
+                html: `<a href=http://localhost:8000/api/changePass/${id}/${email}/${codeCheck}>click here</a>`,
             };
-            Transport.sendMail(mailOptions, function(err, res) {
+            Transport.sendMail(mailOptions, function (err, res) {
                 if (err) console.log(err);
-                else console.log("Message sent successfully");
+                else console.log('Message sent successfully');
             });
             break;
     }

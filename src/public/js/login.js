@@ -1,19 +1,19 @@
 const loginSubmit = document.getElementById("loginSubmit");
-loginSubmit.addEventListener("click", function(e) {
+loginSubmit.addEventListener("click", function (e) {
     e.preventDefault();
     const username = document.getElementById("usernameLogin").value;
     const password = document.getElementById("passwordLogin").value;
     let check = document.getElementById("checkbox").checked; //remember
     fetch("/api/login", {
-            method: "POST",
-            headers: {
-                "Content-type": "application/json",
-            },
-            body: JSON.stringify({
-                username,
-                password,
-            }),
-        })
+        method: "POST",
+        headers: {
+            "Content-type": "application/json",
+        },
+        body: JSON.stringify({
+            username,
+            password,
+        }),
+    })
         .then((data) => data.json())
         .then((data) => {
             if (data.status) {
@@ -42,19 +42,18 @@ loginSubmit.addEventListener("click", function(e) {
                     localStorage.setItem("token", data.token);
                     localStorage.setItem("id", data.id);
                     sessionStorage.setItem("id", data.id);
-                    window.location.href = "/project/"+data.id;
+                    window.location.href = "/project/" + data.id;
                 } else {
                     sessionStorage.setItem("token", data.token);
                     sessionStorage.setItem("id", data.id);
-                    sessionStorage.setItem("username",data.username);
-                    window.location.href = "/project/"+data.id;
+                    sessionStorage.setItem("username", data.username);
+                    window.location.href = "/project/" + data.id;
                 }
-            console.log("debug6");
         })
         .catch((error) => console.log(error));
 });
 const signupSubmit = document.getElementById("signupSubmit");
-signupSubmit.addEventListener("click", function(e) {
+signupSubmit.addEventListener("click", function (e) {
     e.preventDefault();
     const username = document.getElementById("usernameSignup").value;
     const email = document.getElementById("emailSignup").value;
@@ -83,16 +82,16 @@ signupSubmit.addEventListener("click", function(e) {
     }
     else {
         fetch("/api/register", {
-                method: "POST",
-                headers: {
-                    "Content-type": "application/json",
-                },
-                body: JSON.stringify({
-                    username,
-                    password,
-                    email,
-                }),
-            })
+            method: "POST",
+            headers: {
+                "Content-type": "application/json",
+            },
+            body: JSON.stringify({
+                username,
+                password,
+                email,
+            }),
+        })
             .then((data) => data.json())
             .then((data) => {
                 console.log(data);

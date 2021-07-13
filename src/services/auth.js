@@ -1,16 +1,15 @@
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-
 const salt = bcrypt.genSaltSync(10);
-require("dotenv").config();
+
 const privateKey = process.env.privateKey;
 
-exports.hashPassword = (rawPassword) => {
-    return bcrypt.hashSync(rawPassword, salt);
+exports.hashPassword = async (rawPassword) => {
+    return await bcrypt.hashSync(rawPassword, salt);
 };
 
-exports.comparePassword = (rawPassword, hashedPassword) => {
-    const match = bcrypt.compareSync(rawPassword, hashedPassword);
+exports.comparePassword = async (rawPassword, hashedPassword) => {
+    const match = await bcrypt.compareSync(rawPassword, hashedPassword);
     return match;
 };
 
