@@ -3,6 +3,7 @@ mongoose
   .connect("mongodb://localhost/finalProject", {
     useNewUrlParser: true,
     useUnifiedTopology: true,
+    useFindAndModify: false 
   })
   .then(function () {
     console.log("connected");
