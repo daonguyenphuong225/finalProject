@@ -43,22 +43,22 @@
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-                                <form action="/project" method="post" class="createForm">
+                                <div class="createForm">
                                     Title:<input name="title" type="text"> <br> Detail:
                                     <input type="hidden" name="userId">
                                     <input name="detail" type="text"> <br> Status:
-                                    <select name="status" id="">
-                                        <option value="undone" selected>Undone</option>
+                                    <select name="status" id="stt">
+                                        <option value="undone">Undone</option>
+                                        <option value="done" >Done</option>
                                     </select>
-
+    
                             </div>
-
+    
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <button class="btn btn-primary">Get new</button>
+                                <button class="btn btn-primary btngetnew" data-bs-dismiss="modal">Get new</button>
                             </div>
-
-                            </form>
+                                </div>
                         </div>
                     </div>
                 </div>
@@ -104,8 +104,8 @@
                     <option value="Done">Done</option>
                     <option value="Undone">Undone</option>
                 </select>
-                <button class="submit">Submit</button>
-                <button class="delete">Delete</button>
+                <button class="btnsubmit">Submit</button>
+                <button class="btndelete">Delete</button>
             </div>
         </div>
     </div>
