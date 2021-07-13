@@ -42,12 +42,21 @@ loginSubmit.addEventListener("click", function (e) {
                     localStorage.setItem("token", data.token);
                     localStorage.setItem("id", data.id);
                     sessionStorage.setItem("id", data.id);
+<<<<<<< HEAD
                     window.location.href = "/project/" + data.id;
                 } else {
                     sessionStorage.setItem("token", data.token);
                     sessionStorage.setItem("id", data.id);
                     sessionStorage.setItem("username", data.username);
                     window.location.href = "/project/" + data.id;
+=======
+                    window.location.href = "/project/";
+                } else {
+                    sessionStorage.setItem("token", data.token);
+                    sessionStorage.setItem("id", data.id);
+                    sessionStorage.setItem("username",data.username);
+                    window.location.href = "/project/";
+>>>>>>> cd4d34d7cae1de72b37b985a801569c70f95bd63
                 }
         })
         .catch((error) => console.log(error));

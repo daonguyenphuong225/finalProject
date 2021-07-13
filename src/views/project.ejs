@@ -43,8 +43,9 @@
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-                                <form action="/project/<%=id%>" method="post" class="createForm">
+                                <form action="/project" method="post" class="createForm">
                                     Title:<input name="title" type="text"> <br> Detail:
+                                    <input type="hidden" name="userId">
                                     <input name="detail" type="text"> <br> Status:
                                     <select name="status" id="">
                                         <option value="undone" selected>Undone</option>
@@ -67,7 +68,7 @@
                 <%for (const project of projects) { %>
                     <div class="col ">
                         <input type="hidden" name="projectId" value="<%=project._id%>">
-                        <input type="hidden" name="userId" value="<%=id%>">
+                        <input type="hidden" name="userId" value="">
                         <div class="col-md-12">
                             <button type="button" class="btn btn-primary btn-sm btnEdit" data-modal-target="#formEdit">Edit</button>
                         </div>

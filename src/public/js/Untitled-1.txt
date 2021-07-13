@@ -1,0 +1,25 @@
+Xác thực : SS hay token 
+
+
+SS :  Lưu trũ trên servẻ  + ssid gửi về cho client (cookie)
+token:
+
+
+WEB stoảge => {
+    local storage :
+    ss storage
+}
+
+
+Trong mọi requét thì Header(cookie)  luôn đi kèm
+
+
+
+Login => ss lưu {id}
+Login 2 => ss lưu {id2}
+
+ssid1   => ss {id: người dùng}
+ssid2   => ss {id: người dùng 2}
+
+
+API get list Proẹct => check id của ss hay id lưu trong token

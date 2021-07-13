@@ -103,7 +103,7 @@ span{
  .content-btn:hover{
    background-color: rgba(85, 82, 82, 0.2)
 }
-.input-content, .input-user,.input-priority, .update-title-input, .update-priority{
+.input-content, .input-user,.input-priority, .update-title-input, .update-priority, .update-username{
     
    text-align: start;
    overflow:hidden; 

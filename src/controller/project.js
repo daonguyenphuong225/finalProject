@@ -5,28 +5,15 @@ const UserModel = require('../model/user')
 
 exports.getList = async function(req, res) {
     try {
-        let id = req.params.id
 
-        let userName=""
-        
-        let projects = await ProjectModel.find()
-     
+            
+        let projects = await ProjectModel.find({admin:req.session.userId})
         let users = await UserModel.find()
-
-      
-        for(user of users){
-            if(user._id == id){
-                userName = user.username
-              
-            }
-        }
 
         let listData = {
             projects: projects,
             users: users,
-            userName: userName,
             match: req.query,
-            id:id
         }
         res.render('project.ejs', listData)
     
@@ -37,17 +24,16 @@ exports.getList = async function(req, res) {
 
 exports.createProject = async function (req,res){
     try {
-        let {title,detail,status} = req.body
-        let id = req.params.id
-        console.log(id);
+        let {title,detail,status,userId} = req.body
+
         let newProject = await ProjectModel.create({
             title: title,
             detail: detail,
             status:status,
-            admin: id
+            admin: userId
         })
         
-        res.render('Tạo project thành công')
+        res.json('Tạo project thành công')
     } catch (error) {
         res.json(error)
     }
