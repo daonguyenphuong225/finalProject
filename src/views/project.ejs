@@ -70,7 +70,7 @@
                         <input type="hidden" name="projectId" value="<%=project._id%>">
                         <input type="hidden" name="userId" value="">
                         <div class="col-md-12">
-                            <button type="button" class="btn btn-primary btn-sm btnEdit" data-modal-target="#formEdit">Edit</button>
+                            <button type="button" class="btn btn-primary btn-sm btnEdit" onclick='updateSubmit("<%=project._id%>")' data-modal-target="#formEdit">Edit</button>
                         </div>
                         <div class="card p-3" style="cursor: pointer;">
                             <img src="/public/img/bg.png" class="card-img-top" alt="...">
@@ -91,16 +91,42 @@
                     </div>
                     <% } %>
             </div>
-
+            <div class="row row-cols-1 row-cols-md-3 g-4">
+                <%for (const colabor of colaborator) { %>
+                    <div class="col ">
+                        <input type="hidden" name="projectId" value="<%=colabor._id%>">
+                        <input type="hidden" name="userId" value="">
+                        <div class="col-md-12">
+                            <button type="button" class="btn btn-primary btn-sm btnEdit" onclick='updateSubmit("<%=colabor._id%>")' data-modal-target="#formEdit">Edit</button>
+                        </div>
+                        <div class="card p-3" style="cursor: pointer;">
+                            <img src="/public/img/bg.png" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">
+                                    <%=colabor.title %>
+                                </h5>
+                                <p class="card-text">
+                                    <%=colabor.detail%>
+                                </p>
+                                <p class="card-text">
+                                    <span class="badge bg-secondary">
+                                        <%=colabor.status%>
+                                    </span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <% } %>
+            </div>
         </div>
         
         <!-- Edit form-->
         <div class="popup">
             <div class="popup-content">
                 <img src="../public/img/cancel.png" alt="close" class="close">
-                <input type="text" class="input-edit" id=" Title-edit" placeholder="Title">
-                <input type="text" class="input-edit" id=" Detail-edit" placeholder="Detail">
-                <select class="input-edit" id=" Status-select">
+                <input type="text" class="input-edit" id="edtitle" placeholder="Title">
+                <input type="text" class="input-edit" id="eddetail" placeholder="Detail">
+                <select class="input-edit" id="edstt">
                     <option value="Done">Done</option>
                     <option value="Undone">Undone</option>
                 </select>

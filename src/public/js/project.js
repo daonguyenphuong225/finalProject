@@ -19,7 +19,7 @@ $(document).ready(function () {
   });
 });
 let userId = sessionStorage.getItem("id");
-console.log(userId);
+// console.log(userId);
 
 $(".btngetnew").click(function () {
   console.log($("input[name=title]").val());
@@ -44,36 +44,40 @@ $(".btngetnew").click(function () {
     });
 });
 $(".btnsubmit").click(function () {
-  let id = $(this).siblings().eq(0).val();
+  let id = $(this)[0].className.slice(10, 1000);
+  console.log(id);
+  let title = $("#edtitle").val();
+  let detail = $("#eddetail").val();
+  let status = $("#edstt").val();
   $.ajax({
     url: `/project`,
     type: "PUT",
     data: {
-      id,
-      title,
-      detail,
-      status,
+      id: id,
+      title: title,
+      detail: detail,
+      status: status,
     },
   })
     .then((data) => {
       console.log(data);
+      window.location.reload();
     })
     .catch((err) => {
       console.log(err);
     });
 });
 $(".btndelete").click(function () {
-  let id = $(this).siblings().eq(0).val();
-
+  let id = $(this)[0].className.slice(10, 1000);
   $.ajax({
     url: `/project`,
     type: "DELETE",
     data: {
-      id,
+      id: id,
     },
   })
     .then((data) => {
-      location.reload();
+      window.location.reload();
     })
     .catch((err) => {
       console.log(err);
@@ -85,3 +89,9 @@ $(".btnEdit").click(function () {
 $(".close").click(function () {
   document.querySelector(".popup").style.display = "none";
 });
+
+function updateSubmit(id) {
+  console.log(id);
+  $(".btnsubmit").attr("class", `btnsubmit ${id}`);
+  $(".btndelete").attr("class", `btndelete ${id}`);
+}
