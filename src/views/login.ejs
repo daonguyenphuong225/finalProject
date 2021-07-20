@@ -11,9 +11,9 @@
     <script>
         function checkToken() {
             const token = localStorage.getItem('token');
-            const id=localStorage.getItem('id');
+            const id = localStorage.getItem('id');
             if (token) {
-                window.location.href = "/project/"+data.id;
+                window.location.href = "/project/" + data.id;
                 return;
             }
         }
@@ -56,7 +56,10 @@
                     </label>
                     <div class="signup-link">
                         Not a member? <a href="">Signup now</a>
+                        <br>
+                        <a href="http://localhost:8000/api/forgot" id="linkForgotPassword">Forgot password</a>
                     </div>
+
                 </form>
                 <form action="#" class="signup">
                     <div class="field">

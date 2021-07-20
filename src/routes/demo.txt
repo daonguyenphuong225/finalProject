@@ -1,0 +1,85 @@
+B1: Tạo trang  điền email để người dùng lấy pass GET /forgot
+B2: dung điền email và ấn submit thì lập tức gửi mail có đường dẫn như sau
+thông qua API POST /forgot  
+
+GET localhost:3000/renew?token=jwt(chua email, id nguoi dung)
+
+B3": Mình tạo 1 GET/ renew
+    xử lý :  lấy token trong query giải mã .  Nếu khớp thì  , thực hiện service đổi pass  
+    Post /changePass xử lý :  lấy thông tin mk mới , kèm id thực hiện đổi pass
+        
+
+const router = require('express').Router();
+const {
+    register,
+    login,
+    changePass,
+    logout,
+    verifyEmail,
+    mailtoChangePass,
+    verifyEmailToChangePassword,
+    addUserProject,
+} = require('../controller/loginController');
+var nodemailer = require('nodemailer')
+var jwt = require('jsonwebtoken')
+// const { checkAccount } = require("../middleware/auth")
+router.post('/register', register);
+router.post('/login', login);
+router.get('/logout', logout);
+router.get('/:id/:email/:code', verifyEmail);
+
+router.post('/mailtoChangePass', mailtoChangePass);
+router.get('/changePass/:id/:email/:code', verifyEmailToChangePassword);
+router.get('/forgot',(req, res)=>{
+    res.render('changepass.ejs');
+})
+// router.post('/forgot',(req, res)=>{
+//     var email = req.body.email
+    
+//     let Transport = nodemailer.createTransport({
+//         service: 'Gmail',
+//         auth: {
+//             user: process.env.user,
+//             pass: process.env.pass,
+//         },
+//     });
+
+//     var token = jwt.sign(email, 'hoang')
+//     let mailOptions = {};
+//     mailOptions = {
+//         from: 'Hoang',
+//         to: email,
+//         subject: 'Email registered successfully',
+//         html: `<a href="http://localhost:8000/api/renew?token=${token}">click here to complete changepass</a>`,
+//     };
+//     Transport.sendMail(mailOptions, function (err, data) {
+//         if (err) console.log(err);
+//         else {
+//             console.log('Message sent successfully');
+//             res.json('ok')
+//         }
+//     });
+// })
+
+// router.get('/renew', function(req, res, next){
+//     res.render('enternewpass')
+   
+// })
+
+// router.post('/newpass', function(req, res, next){
+//      var token = req.body.token
+//      var password = req.body.password
+
+//     jwt.verify(token, 'hoang', function(err, data){
+//         if(err) res.json('loi')
+
+//         console.log(password,data)
+//         // goi model Usser .update ()
+
+//         res.json('ok')
+//     })
+// })
+router.put('/formchangepass/:id', changePass);
+// router.put('/user/project/:idUser/:idProject', addUserProject);
+
+module.exports = router;

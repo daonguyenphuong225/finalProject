@@ -2,42 +2,129 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Change Password</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
+    <style>
+        input[type=password] {
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        input[type=submit] {
+            width: 100%;
+            background-color: #4c98af;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        input[type=submit]:hover {
+            background-color: #455aa0;
+        }
+
+        form {
+            border-radius: 5px;
+            background-color: #f2f2f2;
+            padding: 20px;
+        }
+    </style>
 </head>
 
 <body>
     <form align="center">
-    <div class="field">
-        <input type="password" placeholder="password" id="password"/>
-    </div>
-    <div class="field btn">
-        <div class="btn-layer"></div>
-        <input type="submit" id="submit" />
-    </div>
+        <div class="field">
+            <input type="password" placeholder="mật khẩu cũ" id="oldPassword" />
+            <input type="password" placeholder="mật khẩu mới" id="newPassword" />
+            <input type="password" placeholder="xác nhận" id="confirmPassword" />
+        </div>
+        <div class="field btn">
+            <div class="btn-layer"></div>
+            <input type="submit" id="submit" />
+        </div>
     </form>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
     <script>
-        document
-            .getElementById('submit')
-            .addEventListener('click', function (e) {
-                e.preventDefault();
-                const password = document.getElementById('password').value;
-                console.log(password);
-                fetch('/api/formchangepass/:id', {
-                    method: 'PUT',
-                    headers: {
-                        'Content-type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        password,
-                    }),
+        document.getElementById('submit').addEventListener('click', function (e) {
+            e.preventDefault();
+            const oldPassword = document.getElementById('oldPassword').value;
+            const newPassword = document.getElementById('newPassword').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            const id = sessionStorage.getItem('id')
+            fetch("/api/changePass", {
+                method: "POST",
+                headers: {
+                    "Content-type": "application/json",
+                },
+                body: JSON.stringify({
+                    oldPassword,
+                    newPassword,
+                    confirmPassword, id
+                }),
+            })
+                .then(data => data.json())
+                .then(data => {
+                    if (data.message) {
+                        Command: toastr["success"](data.message);
+
+                        toastr.options = {
+                            closeButton: false,
+                            debug: false,
+                            newestOnTop: false,
+                            progressBar: false,
+                            positionClass: "toast-top-right",
+                            preventDuplicates: false,
+                            onclick: null,
+                            showDuration: "300",
+                            hideDuration: "1000",
+                            timeOut: "5000",
+                            extendedTimeOut: "1000",
+                            showEasing: "swing",
+                            hideEasing: "linear",
+                            showMethod: "fadeIn",
+                            hideMethod: "fadeOut",
+                        };
+
+                        setTimeout(function () {
+                            window.location.href = "/login"
+                        }, 2000);
+                    }
+                    else if (data.status) {
+                        Command: toastr["warning"](data.status);
+
+                        toastr.options = {
+                            closeButton: false,
+                            debug: false,
+                            newestOnTop: false,
+                            progressBar: false,
+                            positionClass: "toast-top-right",
+                            preventDuplicates: false,
+                            onclick: null,
+                            showDuration: "300",
+                            hideDuration: "1000",
+                            timeOut: "5000",
+                            extendedTimeOut: "1000",
+                            showEasing: "swing",
+                            hideEasing: "linear",
+                            showMethod: "fadeIn",
+                            hideMethod: "fadeOut",
+                        };
+                    }
                 })
-                    .then((data) => data.json())
-                    .then((data) => console.log(data))
-                    .catch((err) => console.log(err));
-            });
+                .catch(err => console.log(err))
+        })
+
     </script>
 </body>
 
