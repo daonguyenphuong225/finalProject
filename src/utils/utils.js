@@ -16,7 +16,7 @@ function generateCode() {
     return Math.random().toString().substring(2, 8);
 }
 
-function sendEmail(id, email, codeCheck, mode) {
+async function sendEmail(id, email, codeCheck, mode) {
     let Transport = nodemailer.createTransport({
         service: 'Gmail',
         auth: {
@@ -33,7 +33,7 @@ function sendEmail(id, email, codeCheck, mode) {
                 subject: 'Email registered successfully',
                 html: `<a href=http://localhost:8000/api/${id}/${email}/${codeCheck}>click here to complete register</a>`,
             };
-            Transport.sendMail(mailOptions, function (err, res) {
+            await Transport.sendMail(mailOptions, function (err, res) {
                 if (err) console.log(err);
                 else console.log('Message sent successfully');
             });
@@ -45,7 +45,7 @@ function sendEmail(id, email, codeCheck, mode) {
                 subject: 'Email change password successfully',
                 html: `<a href=http://localhost:8000/api/changePass/${id}/${email}/${codeCheck}>click here</a>`,
             };
-            Transport.sendMail(mailOptions, function (err, res) {
+            await Transport.sendMail(mailOptions, function (err, res) {
                 if (err) console.log(err);
                 else console.log('Message sent successfully');
             });

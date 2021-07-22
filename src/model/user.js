@@ -6,6 +6,7 @@ const UserSchema = new Schema({
     password: String,
     email: String,
     code: String,
+    token:String,
     idProject: [{
         type: Schema.Types.ObjectId,
         ref: "project",
