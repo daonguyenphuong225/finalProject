@@ -39,6 +39,7 @@ loginSubmit.addEventListener('click', function (e) {
             }
             if (data.token)
                 if (check) {
+
                     localStorage.setItem('token', data.token);
                     localStorage.setItem('id', data.id);
                     sessionStorage.setItem('id', data.id);
@@ -48,6 +49,7 @@ loginSubmit.addEventListener('click', function (e) {
                     sessionStorage.setItem('id', data.id);
                     sessionStorage.setItem('username', data.username);
                     window.location.href = '/project';
+
                 }
         })
         .catch((error) => console.log(error));
